@@ -1,0 +1,83 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "C & E",
+			"command": "/usr/bin/g++",
+			"args": [
+				"-std=c++17", 
+				"-stdlib=libc++", 
+				"-g",
+				"./src/*.cpp",
+				//"${file}",
+				"-o",
+				"${workspaceRoot}/src/main.out",
+				"-lmysqlclient",
+				
+				// Incldue & Library
+				"/usr/local/Cellar/tbb/2020_U3_1/lib/libtbb.a",
+				"-I/usr/local/include",
+				"-I./src",
+				"-I/opt/local/include",
+				"-L/usr/local/lib",
+				"-L/opt/local/lib",
+				
+				"&&",
+				"${workspaceRoot}/src/main.out",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": ["$gcc"],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		},
+		{
+			"type": "shell",
+			"label": "C",
+			"command": "/usr/bin/g++",
+			"args": [
+				"-std=c++17", 
+				"-stdlib=libc++", 
+				"-g",
+				"./src/*.cpp",
+				//"${file}",
+				"-o",
+				"${workspaceRoot}/src/main.out",
+				"-lmysqlclient",
+				
+				// Incldue & Library
+				"/usr/local/Cellar/tbb/2020_U3_1/lib/libtbb.a",
+				"-I/usr/local/include",
+				"-I./src",
+				"-I/opt/local/include",
+				"-L/usr/local/lib",
+				"-L/opt/local/lib"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": ["$gcc"],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		},
+		{
+			"label": "E",
+			"type": "shell",
+			"command": "${workspaceRoot}/src/main.out",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": ["$gcc"],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		}
+	]
+}

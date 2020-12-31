@@ -1,0 +1,12 @@
+{
+    "files.associations": {
+        "algorithm": "cpp",
+        "functional": "cpp",
+        "thread": "cpp",
+        "chrono": "cpp",
+        "type_traits": "cpp",
+        "iostream": "cpp",
+        "iosfwd": "cpp",
+        "queue": "cpp"
+    }
+}
