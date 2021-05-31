@@ -2,10 +2,10 @@
 #include "ObjectPool.h"
 #include <mysql/mysql.h>
 
-class CDBObject : public IReusable{
+class CDBObject {
 public:
-    virtual bool Init() override;
-    virtual void Dispose() override;
+    CDBObject();
+    ~CDBObject();
 
 protected:
     MYSQL m_SqlConn;

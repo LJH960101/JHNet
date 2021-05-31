@@ -3,5 +3,5 @@
 
 class CGlobalDBObject : public CDBObject{
 public:
-    virtual bool Init() override;
+    CGlobalDBObject();
 };

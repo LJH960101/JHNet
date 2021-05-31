@@ -1,17 +1,10 @@
 #pragma once
 #include <tbb/concurrent_queue.h>
 #include <type_traits>
- 
-class IReusable{
-public:
-    virtual bool Init() = 0;
-    virtual void Dispose() = 0;
-};
+#include <atomic>
  
 template<typename T>
 class CObjectPool{
-    static_assert(std::is_base_of<IReusable, T>::value, "T must inherit from IReusable");
-    
 public:
     CObjectPool(int size = 100){
         _maxSize = size;
@@ -45,21 +38,21 @@ public:
             ++_maxSize;
         }
         
-        if( retVal->Init() == false ){
-            return nullptr;
-        }
- 
-        return retVal;
+        return new (retVal) T;
     }
     
     // 오브젝트를 수거한다.
     void ReturnObject(T* object)
     {
-        object->Dispose();
+        object->~T();
         _qObjects.push(object);
+    }
+
+    int GetMaxSize(){
+        return (int) _maxSize;
     }
     
 private:
     tbb::concurrent_queue<T*> _qObjects;
-    int _maxSize; // 최대 배열 크기 (누수 체크나 모니터링 용도로 사용하면 좋을듯)
+    std::atomic<int> _maxSize; // 최대 배열 크기 (누수 체크나 모니터링 용도로 사용하면 좋을듯)
 };

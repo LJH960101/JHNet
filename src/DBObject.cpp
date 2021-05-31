@@ -1,13 +1,9 @@
 #include "DBObject.h"
 
-bool CDBObject::Init() {
-    if(mysql_init(&m_SqlConn) == nullptr){
-        return false;
-    }
-
-    return true;
+CDBObject::CDBObject() {
+    mysql_init(&m_SqlConn);
 }
 
-void CDBObject::Dispose() {
+CDBObject::~CDBObject() {
     mysql_close(&m_SqlConn);
 }
